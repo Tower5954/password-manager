@@ -37,7 +37,9 @@ def generate_password():
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
 def save():
+
     website = web_entry.get()
     email = email_entry.get()
     password = password_entry.get()
@@ -49,20 +51,21 @@ def save():
     }
 
     if len(website) == 0 or len(password) == 0 or len(email) == 0:
-        messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty")
+        messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
     else:
         try:
             with open("data.json", "r") as data_file:
-                # reading old data
+                #Reading old data
                 data = json.load(data_file)
-                # updating old data with new data
         except FileNotFoundError:
             with open("data.json", "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
         else:
+            #Updating old data with new data
             data.update(new_data)
+
             with open("data.json", "w") as data_file:
-                # saving updated data
+                #Saving updated data
                 json.dump(data, data_file, indent=4)
         finally:
             web_entry.delete(0, END)
@@ -71,6 +74,18 @@ def save():
 # ---------------------------- FIND PASSWORD ------------------------------- #
 def find_password():
     website = web_entry.get()
+    try:
+        with open("data.json") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data File Found.")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website, message=f"Email: {email}\nPassword: {password}")
+        else:
+            messagebox.showinfo(title="Nothing Found", message="Sorry nothing was found with that address")
 
 
 
