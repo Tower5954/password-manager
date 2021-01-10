@@ -68,6 +68,14 @@ def save():
             web_entry.delete(0, END)
             password_entry.delete(0, END)
             email_entry.delete(0, END)
+# ---------------------------- FIND PASSWORD ------------------------------- #
+def find_password():
+    website = web_entry.get()
+
+
+
+
+
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -92,7 +100,7 @@ password_label = Label(text="Password:")
 password_label.grid(column=0, row=3)
 
 # --------------Entry-------------------- #
-web_entry = Entry(width=52)
+web_entry = Entry(width=33)
 web_entry.grid(column=1, row=1, columnspan=2, sticky='w')
 web_entry.focus()
 
@@ -110,4 +118,6 @@ password_button.grid(column=2, row=3)
 add_button = Button(text="Add", width=44, command=save)
 add_button.grid(column=1, row=4, columnspan=2, sticky='w')
 
+search_button = Button(text="Search", width=14, command=find_password)
+search_button.grid(column=2, row=1)
 window.mainloop()
